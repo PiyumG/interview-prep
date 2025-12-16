@@ -1,87 +1,192 @@
-# Prototype Pattern
+# \# Prototype Design Pattern (Java)
 
+# 
 
+# \## Overview
 
-A creational design pattern
+# 
 
+# The \*\*Prototype Design Pattern\*\* is a \*\*creational design pattern\*\* used to create new objects by \*\*cloning an existing instance\*\*, rather than creating them from scratch.
 
+# 
 
-When --> 
+# This approach is especially useful when object creation is costly or complex.
 
-the object creation is expensive (DB calls, heavy initializations), this pattern is used
+# 
 
-if you need more objects with similar state
+# ---
 
-if you want to avoid complex construction logics
+# 
 
+# \## When to Use Prototype Pattern
 
+# 
 
+# Use this pattern when:
 
+# 
 
-Create new objects by cloning a prototype instance
+# \- Object creation is \*\*expensive\*\*
 
-Instead of:
+# &nbsp; (e.g., database calls, heavy initialization, complex setup)
 
-new Object();
+# \- You need \*\*multiple objects with similar state\*\*
 
-You do:
+# \- You want to \*\*avoid complex construction logic\*\*
 
-existingObject.clone();
+# \- You want to create objects at runtime without tight coupling to constructors
 
+# 
 
+# ---
 
+# 
 
+# \## Core Idea
 
+# 
 
+# Create new objects by \*\*cloning a prototype instance\*\*.
 
-Advantages 
+# 
 
-* Faster object creation
-* Dynamic runtime behavior
+# \### Instead of:
 
+# ```java
 
+# new Object();
 
-This doesn't want to use Object.clone() method or copying raw memory or using clonable
+# ```
 
+# 
 
+# \### You do:
 
-@Override
+# ```java
 
-public Employee clone() {
+# existingObject.clone();
 
-&nbsp;   return new Employee(this.name, this.department);
+# ```
 
-}
+# 
 
+# The client does \*\*not\*\* create objects directly using `new`.
 
+# 
 
-this is perfectly fine for cloning the object
+# ---
 
-because it also creates a new object, It has a same STATE, The client doesn't want to use <new> directly
+# 
 
+# \## Advantages
 
+# 
 
-&nbsp;       
+# \- Faster object creation
 
-Example-> 
+# \- Reduced construction complexity
 
+# \- Dynamic runtime behavior
 
+# \- Better encapsulation of object creation logic
 
-Employee original = new Employee("Piyum", "Engineering");
+# 
 
+# ---
 
+# 
 
-&nbsp;       Employee clone1 = original.clone();
+# \## Important Note About Cloning
 
-&nbsp;       clone1.setName("Kamal");
+# 
 
+# The Prototype pattern \*\*does not require\*\*:
 
+# 
 
-&nbsp;       Employee clone2 = original.clone();
+# \- Using `Object.clone()`
 
-&nbsp;       clone2.setName("Nimal");
+# \- Copying raw memory
 
+# \- Implementing `Cloneable`
 
+# 
+
+# A custom `clone()` method that copies the object state is \*\*perfectly valid\*\*.
+
+# 
+
+# ---
+
+# 
+
+# \## Example: Custom Clone Method
+
+# 
+
+# ```java
+
+# @Override
+
+# public Employee clone() {
+
+# &nbsp;   return new Employee(this.name, this.department);
+
+# }
+
+# ```
+
+# 
+
+# ✔ This is valid prototype cloning because:
+
+# \- It creates a \*\*new object\*\*
+
+# \- The new object has the \*\*same state\*\*
+
+# \- The client \*\*does not use `new` directly\*\*
+
+# \- Object creation logic is encapsulated
+
+# 
+
+# ---
+
+# 
+
+# \## Example Usage
+
+# 
+
+# ```java
+
+# Employee original = new Employee("Piyum", "Engineering");
+
+# 
+
+# Employee clone1 = original.clone();
+
+# clone1.setName("Kamal");
+
+# 
+
+# Employee clone2 = original.clone();
+
+# clone2.setName("Nimal");
+
+# ```
+
+# 
+
+# ---
+
+# 
+
+# \## Summary
+
+# 
+
+# Prototype Pattern allows object creation by duplicating an existing object's state, making it ideal for scenarios where many similar objects are required and creation cost is high.
 
 
 
